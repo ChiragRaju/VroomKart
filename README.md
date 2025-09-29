@@ -41,3 +41,17 @@ cd Automobile.Api
 # Run with hot reload
 dotnet watch run
 
+# 📝 Quick Setup & Common Commands
+
+### Generate a `.gitignore` for .NET
+```bash
+dotnet new gitignore
+
+docker compose up -d
+
+dotnet ef migrations add InitialCreate -s API -p Infrastructure
+
+dotnet ef database update -s API -p Infrastructure
+
+
+
