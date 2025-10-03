@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices.Marshalling;
 using Core.Entities;
 using Core.Interfaces;
-
+using Core.Specification;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -24,10 +24,11 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts(string? brands = null, string? types = null, string? sort = null)
+        public async Task<ActionResult<IReadOnlyList<Product>>> GetAllProducts(string? brand, string? type, string? sort )
         {
             // var products = await _productRepository.GetProductsAsync(brands, types, sort);
-            var products=await _productRepository.ListAllAsync();
+            var spec=new ProductSpecification(brand,type,sort);
+            var products=await _productRepository.ListAsync(spec);
             return Ok(products);
 
         }
@@ -90,7 +91,10 @@ namespace API.Controllers
         {
             // var brands = await _productRepository.GetBrandsAsync();
             // return Ok(brands);
-            return Ok();
+            var spec=new BrandListSpecification();
+            var brands = await _productRepository.ListAsync(spec);
+
+            return Ok(brands);
 
         }
 
@@ -99,7 +103,9 @@ namespace API.Controllers
         {
             // var types = await _productRepository.GetTypesAsync();
             // return Ok(types);
-            return Ok();
+            var spec = new TypeListSpecification();
+            var types = await _productRepository.ListAsync(spec);
+            return Ok(types);
         }
 
     }
