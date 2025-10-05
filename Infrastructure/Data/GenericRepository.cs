@@ -80,4 +80,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
        return await ApplySpecification<TResult>(spec).ToListAsync();
     }
+
+    public async Task<int> CountAsync(ISpecification<T> spec)
+    {
+        var query=_context.Set<T>().AsQueryable();
+        query=spec.ApplyCriteria(query);
+        return await query.CountAsync();
+    }
 }

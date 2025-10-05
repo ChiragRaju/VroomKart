@@ -1,4 +1,5 @@
-using System.Runtime.InteropServices.Marshalling;
+
+using API.RequestHelpers;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
@@ -9,7 +10,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseApiController
     {
         private readonly IGenericRepository<Product> _productRepository;
 
@@ -24,12 +25,17 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetAllProducts(string? brand, string? type, string? sort )
+        public async Task<ActionResult<IReadOnlyList<Product>>> GetAllProducts([FromQuery] ProductSpecParams specParams )
         {
             // var products = await _productRepository.GetProductsAsync(brands, types, sort);
-            var spec=new ProductSpecification(brand,type,sort);
-            var products=await _productRepository.ListAsync(spec);
-            return Ok(products);
+            var spec=new ProductSpecification(specParams);
+           
+            //var products=await _productRepository.ListAsync(spec);
+            //var count=await _productRepository.CountAsync(spec);
+            //var pagination=new Pagination<Product>(specParams.PageIndex, specParams.PageSize, count, products);
+            return await CreatePageResult(_productRepository, spec, specParams.PageIndex, specParams.PageSize);
+
+            //return Ok(products);
 
         }
 
