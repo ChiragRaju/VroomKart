@@ -1,9 +1,6 @@
-using System;
-using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace Infrastructure.Data;
 
