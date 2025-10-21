@@ -3,6 +3,7 @@ using API.RequestHelpers;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specification;
+using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -25,7 +26,7 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetAllProducts([FromQuery] ProductSpecParams specParams )
+        public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts([FromQuery] ProductSpecParams specParams )
         {
             // var products = await _productRepository.GetProductsAsync(brands, types, sort);
             var spec=new ProductSpecification(specParams);

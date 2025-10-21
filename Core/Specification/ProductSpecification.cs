@@ -1,30 +1,31 @@
 using System;
 using Core.Entities;
-using Microsoft.VisualBasic;
+using Core.Specification;
 
-namespace Core.Specification;
+namespace Core.Specifications;
 
 public class ProductSpecification : BaseSpecification<Product>
 {
-    public ProductSpecification(ProductSpecParams specParams) : base(x =>
-    (string.IsNullOrEmpty(specParams.Search) || x.Name.ToLower().Contains(specParams.Search)) &&
-    (specParams.Brands.Count==0 || specParams.Brands.Contains( x.Brand) && (specParams.Types.Count==0 || specParams.Types.Contains(x.Type))))
+    public ProductSpecification(ProductSpecParams productParams)
+        : base(x =>
+            (string.IsNullOrEmpty(productParams.Search)
+                || x.Name.ToLower().Contains(productParams.Search)) &&
+            (!productParams.Brands.Any() || productParams.Brands.Contains(x.Brand)) &&
+            (!productParams.Types.Any() || productParams.Types.Contains(x.Type)))
     {
-        ApplyPaging(specParams.PageSize * (specParams.PageIndex - 1), specParams.PageSize);
-        switch (specParams.Sort)
+        ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
+
+        switch (productParams.Sort)
         {
             case "priceAsc":
-                AddOrderBy(p => p.Price);
+                AddOrderBy(x => x.Price);
                 break;
             case "priceDesc":
-                AddOrderByDescending(p => p.Price);
+                AddOrderByDescending(x => x.Price);
                 break;
             default:
-                AddOrderBy(n => n.Name);
+                AddOrderBy(x => x.Name);
                 break;
         }
-        
     }
-
-
 }

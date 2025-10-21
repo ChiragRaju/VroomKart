@@ -5,12 +5,8 @@ import { MatBadge } from '@angular/material/badge';
 
 @Component({
   selector: 'app-header',
-  imports: [MatIcon, MatButton, MatBadge],
+  imports: [MatIcon, MatButton],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
-  handleOnClick() {
-    this;
-  }
-}
+export class HeaderComponent {}

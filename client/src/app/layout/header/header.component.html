@@ -1,34 +1,66 @@
-<header class="shadow-md bg-amber-300 w-full">
-  <div class="flex items-center justify-between max-w-screen-2xl mx-auto px-6 py-3">
+<header class="fixed top-0 left-0 w-full bg-amber-400 shadow-md z-50">
+  <div class="flex items-center justify-between max-w-7xl mx-auto px-6 py-3">
     <!-- Logo -->
-    <a routerLink="/" class="flex items-center">
-      <img src="/images/VroomKart-logo-transparent.png" alt="App Logo" class="h-32 w-auto" />
+    <a routerLink="/" class="flex items-center gap-2">
+      <img src="/images/VroomKart-logo-transparent.png" alt="VroomKart Logo" class="h-12 w-auto" />
     </a>
+
     <!-- Navigation -->
-    <nav class="flex gap-4 uppercase text-sm font-medium">
-      <a routerLink="/" routerLinkActive="font-bold text-blue-600" class="transition-colors"
+    <nav class="hidden md:flex items-center gap-8 text-lg font-semibold uppercase text-gray-800">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        class="hover:text-white transition-colors duration-200"
         >Home</a
       >
-      <a routerLink="/shop" routerLinkActive="font-bold text-blue-600" class="transition-colors"
+      <a
+        routerLink="/shop"
+        routerLinkActive="active"
+        class="hover:text-white transition-colors duration-200"
         >Shop</a
       >
-      <a routerLink="/contact" routerLinkActive="font-bold text-blue-600" class="transition-colors"
-        >Contact</a
+      <a
+        routerLink="/test-error"
+        routerLinkActive="active"
+        class="hover:text-white transition-colors duration-200"
+        >Errors</a
       >
     </nav>
-    <!-- Actions -->
+
+    <!-- Right Section -->
     <div class="flex items-center gap-4">
       <a
         routerLink="/cart"
-        matBadge="5"
-        matBadgeSize="large"
-        matBadgeColor="accent"
-        class="custom-badge flex items-center"
+        routerLinkActive="active"
+        class="relative flex items-center justify-center"
       >
-        <mat-icon class="text-3xl">shopping_cart</mat-icon>
+        <mat-icon class="text-3xl text-gray-800 hover:text-white transition-colors duration-200">
+          shopping_cart
+        </mat-icon>
+        <span
+          matBadge="3"
+          matBadgeColor="warn"
+          matBadgeSize="small"
+          class="absolute -top-1 -right-2"
+        ></span>
       </a>
-      <button mat-stroked-button color="primary" routerLink="/login" class="ml-2">Login</button>
-      <button mat-flat-button color="primary" routerLink="/signup" class="ml-2">Sign Up</button>
+
+      <button
+        mat-stroked-button
+        color="primary"
+        routerLink="/login"
+        class="hover:bg-white hover:text-amber-500 transition"
+      >
+        Login
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        routerLink="/signup"
+        class="hover:bg-white hover:text-amber-500 transition"
+      >
+        Sign Up
+      </button>
     </div>
   </div>
 </header>

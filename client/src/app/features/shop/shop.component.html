@@ -1,0 +1,85 @@
+<!-- Toolbar Section -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-3 mb-6 mt-4 px-4">
+  <h2 class="text-2xl font-semibold text-gray-800">Products</h2>
+
+  <div class="flex flex-wrap justify-between gap-3">
+    <mat-paginator
+      class="bg-white"
+      (page)="handlePageEvent($event)"
+      [length]="products?.count"
+      [pageSize]="shopParams.pageSize"
+      [showFirstLastButtons]="true"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="shopParams.pageNumber - 1"
+      aria-label="Select page"
+    ></mat-paginator>
+
+    <form
+      #searchForm="ngForm"
+      (ngSubmit)="onSearchChange()"
+      class="relative flex items-center w-full max-w-md mx-4"
+    >
+      <input
+        type="serach"
+        class="w-full border border-gray-300 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+        placeholder="Search"
+        name="search"
+        [(ngModel)]="shopParams.search"
+      />
+      <mat-icon class="absolute left-3 text-gray-400 pointer-events-none">search</mat-icon>
+      <button
+        type="submit"
+        mat-icon-button
+        class="absolute inset-y-0 right-8 top-2 flex items-center pl-3"
+        aria-label="Search"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </form>
+    <div class="flex-gap-3">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="openFiltersDialog()"
+        class="flex items-center gap-2 hover:bg-amber-50 transition"
+      >
+        <mat-icon>filter_list</mat-icon>
+        Filters
+      </button>
+
+      <button
+        mat-stroked-button
+        color="primary"
+        [mat-menu-trigger-for]="sortMenu"
+        class="flex items-center gap-2 hover:bg-amber-50 transition"
+      >
+        <mat-icon>swap_vert</mat-icon>
+        Sort
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Responsive Product Grid -->
+<div
+  class="grid gap-6 px-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+>
+  @for (product of products?.data; track product.id) {
+  <app-product-item [product]="product"></app-product-item>
+  }
+</div>
+
+<!-- Sort Menu -->
+<mat-menu #sortMenu="matMenu">
+  <mat-selection-list
+    [multiple]="false"
+    (selectionChange)="onSortChange($event)"
+    class="min-w-[200px]"
+  >
+    @for (sort of sortOptions; track $index) {
+    <mat-list-option [value]="sort.value" [selected]="shopParams.sort === sort.value">
+      {{ sort.name }}
+    </mat-list-option>
+    }
+  </mat-selection-list>
+</mat-menu>
