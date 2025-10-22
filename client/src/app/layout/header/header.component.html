@@ -2,7 +2,12 @@
   <div class="flex items-center justify-between max-w-7xl mx-auto px-6 py-3">
     <!-- Logo -->
     <a routerLink="/" class="flex items-center gap-2">
-      <img src="/images/VroomKart-logo-transparent.png" alt="VroomKart Logo" class="h-12 w-auto" />
+      <img
+        routerLink="/"
+        src="/images/VroomKart-logo-transparent.png"
+        alt="VroomKart Logo"
+        class="h-12 w-auto"
+      />
     </a>
 
     <!-- Navigation -->
@@ -10,6 +15,7 @@
       <a
         routerLink="/"
         routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         class="hover:text-white transition-colors duration-200"
         >Home</a
       >
@@ -18,12 +24,6 @@
         routerLinkActive="active"
         class="hover:text-white transition-colors duration-200"
         >Shop</a
-      >
-      <a
-        routerLink="/test-error"
-        routerLinkActive="active"
-        class="hover:text-white transition-colors duration-200"
-        >Errors</a
       >
     </nav>
 

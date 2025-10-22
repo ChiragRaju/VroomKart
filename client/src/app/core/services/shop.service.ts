@@ -70,6 +70,20 @@ export class ShopService {
     }
   }
 
+  //   | Step | Action                      | Example                                |
+  // | ---- | --------------------------- | -------------------------------------- |
+  // | 1    | User clicks `/products/3`   | Router loads ProductDetailComponent    |
+  // | 2    | Component reads route param | `id = 3`                               |
+  // | 3    | Component calls service     | `getProductById(3)`                    |
+  // | 4    | Service calls API           | `GET /api/products/3`                  |
+  // | 5    | Backend returns product     | `{ id: 3, name: 'Bike', price: 1200 }` |
+  // | 6    | Component stores data       | `this.product = response`              |
+  // | 7    | Template displays product   | UI updates automatically               |
+
+  getProductById(id: number) {
+    return this.http.get<Products>(this.baseUrl + 'products/' + id);
+  }
+
   getTypes() {
     if (this.types.length > 0) return;
     return this.http.get<string[]>(this.baseUrl + 'products/types').subscribe({
