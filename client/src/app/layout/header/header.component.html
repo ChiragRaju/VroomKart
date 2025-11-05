@@ -25,6 +25,7 @@
         class="hover:text-white transition-colors duration-200"
         >Shop</a
       >
+      <a routerLink="/test-error" routerLinkActive="active">Errors</a>
     </nav>
 
     <!-- Right Section -->
@@ -64,3 +65,7 @@
     </div>
   </div>
 </header>
+
+@if (busyService.loading) {
+<mat-progress-bar class="fixed top-20 z-50" mode="indeterminate"></mat-progress-bar>
+}

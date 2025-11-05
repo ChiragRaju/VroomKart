@@ -10,35 +10,38 @@ namespace API.Controllers
     [ApiController]
     public class BuggyController : BaseApiController
     {
-        [HttpGet("Unauthorized")]
-        public async Task<IActionResult> GetUnauthorized()
+        [HttpGet("unauthorized")]
+        public IActionResult GetUnauthorized()
         {
-            return Unauthorized("Forbidden");
+            return Unauthorized();
         }
+
         [HttpGet("badrequest")]
-        public async Task<IActionResult> GetBadRequest()
+        public IActionResult GetBadRequest()
         {
-            return BadRequest("Not a Good Request");
+            return BadRequest("This is not a good request");
         }
-        [HttpGet("NotFound")]
-        public async Task<IActionResult> GetNotFound()
+
+        [HttpGet("notfound")]
+        public IActionResult GetNotFound()
         {
             return NotFound();
         }
 
         [HttpGet("internalerror")]
-        public async Task<IActionResult> GetInternalServerError()
+        public IActionResult GetInternalError()
         {
-            throw new Exception("This is test Exception");
+            throw new Exception("This is a test exception");
         }
 
         [HttpPost("validationerror")]
-        public async Task<IActionResult> GetValidatingError(CreateProductDto product)
+        public IActionResult GetValidationError(CreateProductDto product)
         {
             return Ok();
         }
 
-       
+
+
 
     }
 }
